@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class GoogleFrench extends GoogleEnglish {
+class GoogleFrench extends GoogleEnglish {
 
     @FindBy(css = "div#gws-output-pages-elements-homepage_additional_languages__als a")
     private List<WebElement> languageList;

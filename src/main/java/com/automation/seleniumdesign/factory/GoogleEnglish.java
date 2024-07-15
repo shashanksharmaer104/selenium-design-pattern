@@ -1,5 +1,6 @@
 package com.automation.seleniumdesign.factory;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,8 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-public class GoogleEnglish extends GooglePage {
+class GoogleEnglish extends GooglePage {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -37,7 +39,10 @@ public class GoogleEnglish extends GooglePage {
     @Override
     public void search(final String keyword) {
         this.searchBox.clear();
-        this.searchBox.sendKeys();
+        for (char ch : keyword.toCharArray()) {
+            Uninterruptibles.sleepUninterruptibly(20, TimeUnit.MILLISECONDS);
+            this.searchBox.sendKeys(ch + "");
+        }
         this.wait.until((d) -> this.searchBtn.isDisplayed());
         this.searchBox.click();
     }
