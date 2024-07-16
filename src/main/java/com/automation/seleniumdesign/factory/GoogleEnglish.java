@@ -16,7 +16,7 @@ class GoogleEnglish extends GooglePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    @FindBy(id = "q")
+    @FindBy(name = "q")
     private WebElement searchBox;
 
     @FindBy(name = "btnK")
@@ -44,7 +44,7 @@ class GoogleEnglish extends GooglePage {
             this.searchBox.sendKeys(ch + "");
         }
         this.wait.until((d) -> this.searchBtn.isDisplayed());
-        this.searchBox.click();
+        this.searchBtn.click();
     }
 
     @Override
