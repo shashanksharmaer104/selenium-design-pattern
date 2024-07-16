@@ -26,7 +26,8 @@ public class GoogleSearchTest extends BaseTest {
         return new Object[][] {
                 {"ENG", "Selenium WebDriver"},
                 {"FRE", "Playwright"},
-                {"ARB", "Design Patterns"}
+                {"ARB", "Design Patterns"},
+                {"ES", "Playwright"}
         };
     }
 
