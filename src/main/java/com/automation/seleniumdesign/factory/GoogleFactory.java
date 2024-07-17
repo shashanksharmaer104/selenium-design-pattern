@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class GoogleFactory {
+public class  GoogleFactory {
 
     private static final Function<WebDriver, GooglePage> ENG = GoogleEnglish::new;
     private static final Function<WebDriver, GooglePage> FRE = GoogleFrench::new;
