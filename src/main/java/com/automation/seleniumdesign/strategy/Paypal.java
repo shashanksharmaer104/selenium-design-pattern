@@ -16,6 +16,6 @@ public class Paypal implements PaymentOption {
     @Override
     public void enterPaymentInformation(Map<String, String> paymentDetails) {
         this.username.sendKeys(paymentDetails.get("username"));
-        this.username.sendKeys(paymentDetails.get("password"));
+        this.password.sendKeys(paymentDetails.get("password"));
     }
 }
