@@ -30,7 +30,9 @@ public class BookFlightTest extends BaseTest {
         }
 
         //Open new search page
-        this.bookFlightScreen.clickNewSearch();
+        if (this.bookFlightScreen.getRecentSearch().isDisplayed()) {
+            this.bookFlightScreen.getRecentSearch().clickNewSearch();
+        }
 
         Assert.assertTrue(this.bookFlightScreen.getLoginContainer().isDisplayed());
 
@@ -47,8 +49,6 @@ public class BookFlightTest extends BaseTest {
 
         boolean isError = this.bookFlightScreen.errorMessageDisplayed();
         Assert.assertTrue(isError, "Error message not displayed");
-
-
     }
 
     @DataProvider

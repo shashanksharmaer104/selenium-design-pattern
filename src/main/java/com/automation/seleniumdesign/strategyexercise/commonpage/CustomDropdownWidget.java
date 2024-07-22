@@ -1,11 +1,13 @@
 package com.automation.seleniumdesign.strategyexercise.commonpage;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class CustomDropdownWidget extends AbstractComponent {
@@ -31,7 +33,8 @@ public class CustomDropdownWidget extends AbstractComponent {
 
     public void selectAdults(final String value) {
         this.adultsBtn.click();
-        List<WebElement> element = this.adultsBtn.findElement(By.xpath("//*[@class='chosen-results']"))
+        Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
+        final List<WebElement> element = this.adultsBtn.findElement(By.xpath("//*[@class='chosen-results']"))
                 .findElements(By.xpath("//li//span"))
                 .stream().filter(el -> el.getText().equalsIgnoreCase(value))
                 .collect(Collectors.toList());
@@ -40,7 +43,8 @@ public class CustomDropdownWidget extends AbstractComponent {
 
     public void selectChildren(final String value) {
         this.childrenBtn.click();
-        List<WebElement> element = this.childrenBtn.findElement(By.xpath("//*[@class='chosen-results']"))
+        Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
+        final List<WebElement> element = this.childrenBtn.findElement(By.xpath("//*[@class='chosen-results']"))
                 .findElements(By.xpath("//li//span"))
                 .stream().filter(el -> el.getText().equalsIgnoreCase(value))
                 .collect(Collectors.toList());
@@ -49,7 +53,8 @@ public class CustomDropdownWidget extends AbstractComponent {
 
     public void selectInfants(final String value) {
         this.infantsBtn.click();
-        List<WebElement> element = this.infantsBtn.findElement(By.xpath("//*[@class='chosen-results']"))
+        Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
+        final List<WebElement> element = this.infantsBtn.findElement(By.xpath("//*[@class='chosen-results']"))
                 .findElements(By.xpath("//li//span"))
                 .stream().filter(el -> el.getText().equalsIgnoreCase(value))
                 .collect(Collectors.toList());

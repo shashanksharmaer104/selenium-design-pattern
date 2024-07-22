@@ -2,6 +2,7 @@ package com.automation.seleniumdesign.strategyexercise;
 
 import com.automation.seleniumdesign.strategyexercise.commonpage.CookiesHandler;
 import com.automation.seleniumdesign.strategyexercise.commonpage.CustomDropdownWidget;
+import com.automation.seleniumdesign.strategyexercise.commonpage.RecentSearch;
 import com.google.common.util.concurrent.Uninterruptibles;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +21,7 @@ public class BookFlightScreen {
     private CustomDropdownWidget customDropdownWidget;
     private SearchStrategy searchStrategy;
     private CookiesHandler cookiesHandler;
+    private RecentSearch recentSearch;
 
     @FindBy(css = "input#ctl00_c_CtPrOffer_txtEnterCode")
     private WebElement promotionCode;
@@ -30,15 +32,13 @@ public class BookFlightScreen {
     @FindBy(id = "ctl00_c_IBE_PB_FF")
     private WebElement searchBtn;
 
-    @FindBy(css = "a.ts-session-expire--link")
-    private WebElement newSearchBtn;
-
     public BookFlightScreen(final WebDriver driver) {
         this.driver = driver;
         this.loginContainer = new LoginContainer(driver);
         this.loginPopup = new LoginPopup(driver);
         this.customDropdownWidget = new CustomDropdownWidget(driver);
         this.cookiesHandler = new CookiesHandler(driver);
+        this.recentSearch = new RecentSearch(driver);
         PageFactory.initElements(this.driver, this);
     }
 
@@ -58,9 +58,8 @@ public class BookFlightScreen {
         return cookiesHandler;
     }
 
-    public void clickNewSearch() {
-        Uninterruptibles.sleepUninterruptibly(2, TimeUnit.SECONDS);
-        this.newSearchBtn.click();
+    public RecentSearch getRecentSearch() {
+        return recentSearch;
     }
 
     public void setSearchStrategy(SearchStrategy searchStrategy) {
