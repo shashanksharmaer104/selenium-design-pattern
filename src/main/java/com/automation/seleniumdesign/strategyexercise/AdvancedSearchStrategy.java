@@ -18,12 +18,22 @@ public class AdvancedSearchStrategy extends AbstractComponent implements SearchS
     @FindBy(css = "")
     private WebElement departingDate;
 
+    @FindBy(id = "dvRadioMulti")
+    private WebElement advancedSearchRadioBtn;
+
     public AdvancedSearchStrategy(WebDriver driver) {
         super(driver);
     }
 
+    public void selectAdvancedSearchOption() {
+        this.advancedSearchRadioBtn.click();
+    }
+
     @Override
     public void enterDetails(Map<String, String> searchDetails) {
+
+        selectAdvancedSearchOption();
+
         this.departureAirport.clear();
         this.departureAirport.sendKeys(searchDetails.get("DA"));
 

@@ -19,19 +19,29 @@ public class ReturnStrategy extends AbstractComponent implements SearchStrategy 
     private WebElement departingDate;
 
     @FindBy(css = "")
-    private WebElement returingDate;
+    private WebElement returningDate;
+
+    @FindBy(xpath = "//div[@id='Div1' and @data-radio=\"RT_OW\"]")
+    private WebElement returnRadioBtn;
 
     public ReturnStrategy(WebDriver driver) {
         super(driver);
     }
 
+    public void selectReturnOption() {
+        this.returnRadioBtn.click();
+    }
+
     @Override
     public void enterDetails(Map<String, String> searchDetails) {
+
+        selectReturnOption();
+
         this.departureAirport.clear();
-        this.departureAirport.sendKeys(searchDetails.get("DA"));
+        this.departureAirport.sendKeys(searchDetails.get("DepartureAirport"));
 
         this.arrivalAirport.clear();
-        this.arrivalAirport.sendKeys(searchDetails.get("AA"));
+        this.arrivalAirport.sendKeys(searchDetails.get("ArrivalAirport"));
     }
 
     @Override

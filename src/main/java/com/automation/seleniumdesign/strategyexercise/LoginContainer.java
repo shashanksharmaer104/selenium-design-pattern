@@ -19,7 +19,7 @@ public class LoginContainer extends AbstractComponent {
     }
 
     @Override
-    protected boolean isDisplayed() {
+    public boolean isDisplayed() {
         return this.wait.until(d -> this.loginBtn.isDisplayed());
     }
 }

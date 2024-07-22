@@ -18,17 +18,27 @@ public class OneWayStrategy extends AbstractComponent implements SearchStrategy 
     @FindBy(css = "")
     private WebElement departingDate;
 
+    @FindBy(id = "dvRadioOneway")
+    private WebElement oneWayRadioBtn;
+
     public OneWayStrategy(WebDriver driver) {
         super(driver);
     }
 
+    public void selectOneWayOption() {
+        this.oneWayRadioBtn.click();
+    }
+
     @Override
     public void enterDetails(Map<String, String> searchDetails) {
+
+        selectOneWayOption();
+
         this.departureAirport.clear();
-        this.departureAirport.sendKeys(searchDetails.get("DA"));
+        this.departureAirport.sendKeys(searchDetails.get("DepartureAirport"));
 
         this.arrivalAirport.clear();
-        this.arrivalAirport.sendKeys(searchDetails.get("AA"));
+        this.arrivalAirport.sendKeys(searchDetails.get("ArrivalAirport"));
     }
 
     @Override
