@@ -33,32 +33,25 @@ public class CustomDropdownWidget extends AbstractComponent {
 
     public void selectAdults(final String value) {
         this.adultsBtn.click();
-        Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
-        final List<WebElement> element = this.adultsBtn.findElement(By.xpath("//*[@class='chosen-results']"))
-                .findElements(By.xpath("//li//span"))
-                .stream().filter(el -> el.getText().equalsIgnoreCase(value))
-                .collect(Collectors.toList());
-        element.get(0).click();
+        getOptionElement(this.adultsBtn, value).click();
     }
 
     public void selectChildren(final String value) {
         this.childrenBtn.click();
-        Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
-        final List<WebElement> element = this.childrenBtn.findElement(By.xpath("//*[@class='chosen-results']"))
-                .findElements(By.xpath("//li//span"))
-                .stream().filter(el -> el.getText().equalsIgnoreCase(value))
-                .collect(Collectors.toList());
-        element.get(0).click();
+        getOptionElement(this.childrenBtn, value).click();
     }
 
     public void selectInfants(final String value) {
         this.infantsBtn.click();
+        getOptionElement(this.infantsBtn, value).click();
+    }
+
+    private WebElement getOptionElement(final WebElement parentButton, final String value) {
         Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
-        final List<WebElement> element = this.infantsBtn.findElement(By.xpath("//*[@class='chosen-results']"))
+        return parentButton.findElement(By.xpath("//*[@class='chosen-results']"))
                 .findElements(By.xpath("//li//span"))
                 .stream().filter(el -> el.getText().equalsIgnoreCase(value))
-                .collect(Collectors.toList());
-        element.get(0).click();
+                .collect(Collectors.toList()).get(0);
     }
 
     @Override
