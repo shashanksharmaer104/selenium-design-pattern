@@ -20,7 +20,6 @@ public class BaseTest {
 
     @AfterTest
     public void quitDriver() {
-        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
         this.driver.quit();
     }
 

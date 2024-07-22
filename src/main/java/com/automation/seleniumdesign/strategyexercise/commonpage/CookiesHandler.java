@@ -9,20 +9,27 @@ import java.time.Duration;
 
 public class CookiesHandler extends AbstractComponent {
 
+    private WebDriver driver;
+
     @FindBy(id = "onetrust-accept-btn-handler")
     private WebElement accept;
 
     @FindBy(id = "onetrust-pc-btn-handler")
     private WebElement cookiesPreference;
 
-    public CookiesHandler(WebDriver driver) {
+    public CookiesHandler(final WebDriver driver) {
         super(driver);
+        this.driver = driver;
     }
 
     @Override
     public boolean isDisplayed() {
-        return new WebDriverWait(this.driver, Duration.ofSeconds(5))
-                .until(d -> this.accept.isDisplayed());
+        try {
+            return new WebDriverWait(this.driver, Duration.ofSeconds(5))
+                    .until(d -> this.accept.isDisplayed());
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void acceptCookies() {

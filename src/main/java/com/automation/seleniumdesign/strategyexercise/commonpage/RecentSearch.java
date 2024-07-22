@@ -11,17 +11,24 @@ import java.util.concurrent.TimeUnit;
 
 public class RecentSearch extends AbstractComponent {
 
+    private WebDriver driver;
+
     @FindBy(css = "a.ts-session-expire--link")
     private WebElement newSearchBtn;
 
     public RecentSearch(WebDriver driver) {
         super(driver);
+        this.driver = driver;
     }
 
     @Override
     public boolean isDisplayed() {
-        return new WebDriverWait(this.driver, Duration.ofSeconds(5))
-                .until(d -> this.newSearchBtn.isDisplayed());
+        try {
+            return new WebDriverWait(this.driver, Duration.ofSeconds(5))
+                    .until(d -> this.newSearchBtn.isDisplayed());
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void clickNewSearch() {

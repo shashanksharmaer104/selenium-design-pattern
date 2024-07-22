@@ -8,7 +8,7 @@ import java.time.Duration;
 
 public abstract class AbstractComponent {
 
-    protected WebDriver driver;
+    //protected WebDriver driver;
     protected WebDriverWait wait;
 
     public AbstractComponent(final WebDriver driver) {
