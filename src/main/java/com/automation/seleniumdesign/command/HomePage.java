@@ -12,48 +12,13 @@ public class HomePage {
 
     private final WebDriver driver;
 
-    //buttons
-    @FindBy(css = "div.button-box button.btn-info")
-    private WebElement infoBtn;
-
-    @FindBy(css = "div.button-box button.btn-warning")
-    private WebElement warningBtn;
-
-    @FindBy(css = "div.button-box button.btn-success")
-    private WebElement successBtn;
-
-    @FindBy(css = "div.button-box button.btn-danger")
-    private WebElement dangerBtn;
-
-    //notifications
-    @FindBy(css = "div.jq-icon-info")
-    private WebElement infoAlert;
-
-    @FindBy(css = "div.jq-icon-warning")
-    private WebElement warningAlert;
-
-    @FindBy(css = "div.jq-icon-success")
-    private WebElement successAlert;
-
-    @FindBy(css = "div.jq-icon-error")
-    private WebElement dangerAlert;
-
-    //dismissal alerts
-    @FindBy(xpath = "//h4[text()='Dissmissal Alert']//following-sibling::div[contains(@class,'alert-info')]")
-    private WebElement dismissInfoAlert;
-
-    @FindBy(xpath = "//h4[text()='Dissmissal Alert']//following-sibling::div[contains(@class,'alert-success')]")
-    private WebElement dismissSuccessAlert;
-
-    @FindBy(xpath = "//h4[text()='Dissmissal Alert']//following-sibling::div[contains(@class,'alert-danger')]")
-    private WebElement dismissDanderAlert;
-
-    @FindBy(xpath = "//h4[text()='Dissmissal Alert']//following-sibling::div[contains(@class,'alert-warning')]")
-    private WebElement dismissWarnAlert;
+    private final ToastAlerts toastAlerts;
+    private final DismissalAlert dismissalAlert;
 
     public HomePage(final WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+        this.toastAlerts = new ToastAlerts(this.driver);
+        this.dismissalAlert = new DismissalAlert(this.driver);
     }
 
     public void goTo() {
@@ -63,15 +28,19 @@ public class HomePage {
     public List<ElementValidator> getElementValidators() {
         return Arrays.asList(
                 //notification
-                new NotificationValidator(infoBtn, infoAlert),
-                new NotificationValidator(warningBtn, warningAlert),
-                new NotificationValidator(successBtn, successAlert),
-                new NotificationValidator(dangerBtn, dangerAlert),
+                new NotificationValidator(this.toastAlerts.getInfoBtn(),
+                        this.toastAlerts.getInfoAlert()),
+                new NotificationValidator(this.toastAlerts.getWarningBtn(),
+                        this.toastAlerts.getWarningAlert()),
+                new NotificationValidator(this.toastAlerts.getSuccessBtn(),
+                        this.toastAlerts.getSuccessAlert()),
+                new NotificationValidator(this.toastAlerts.getDangerBtn(),
+                        this.toastAlerts.getDangerAlert()),
                 //dismiss
-                new DismissalAlertValidator(dismissInfoAlert),
-                new DismissalAlertValidator(dismissSuccessAlert),
-                new DismissalAlertValidator(dismissWarnAlert),
-                new DismissalAlertValidator(dismissDanderAlert)
+                new DismissalAlertValidator(this.dismissalAlert.getDismissInfoAlert()),
+                new DismissalAlertValidator(this.dismissalAlert.getDismissSuccessAlert()),
+                new DismissalAlertValidator(this.dismissalAlert.getDismissWarnAlert()),
+                new DismissalAlertValidator(this.dismissalAlert.getDismissDanderAlert())
         );
     }
 }
