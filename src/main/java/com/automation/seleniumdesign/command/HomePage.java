@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class HomePage {
 
     private final WebDriver driver;
@@ -36,16 +39,16 @@ public class HomePage {
     private WebElement dangerAlert;
 
     //dismissal alerts
-    @FindBy(css = "div.alert-info")
+    @FindBy(xpath = "//h4[text()='Dissmissal Alert']//following-sibling::div[contains(@class,'alert-info')]")
     private WebElement dismissInfoAlert;
 
-    @FindBy(css = "div.alert-success")
+    @FindBy(xpath = "//h4[text()='Dissmissal Alert']//following-sibling::div[contains(@class,'alert-success')]")
     private WebElement dismissSuccessAlert;
 
-    @FindBy(css = "div.alert-danger")
+    @FindBy(xpath = "//h4[text()='Dissmissal Alert']//following-sibling::div[contains(@class,'alert-danger')]")
     private WebElement dismissDanderAlert;
 
-    @FindBy(css = "div.alert-warning")
+    @FindBy(xpath = "//h4[text()='Dissmissal Alert']//following-sibling::div[contains(@class,'alert-warning')]")
     private WebElement dismissWarnAlert;
 
     public HomePage(final WebDriver driver) {
@@ -55,5 +58,20 @@ public class HomePage {
 
     public void goTo() {
         this.driver.get("https://vins-udemy.s3.amazonaws.com/ds/admin-template/admin-template.html");
+    }
+
+    public List<ElementValidator> getElementValidators() {
+        return Arrays.asList(
+                //notification
+                new NotificationValidator(infoBtn, infoAlert),
+                new NotificationValidator(warningBtn, warningAlert),
+                new NotificationValidator(successBtn, successAlert),
+                new NotificationValidator(dangerBtn, dangerAlert),
+                //dismiss
+                new DismissalAlertValidator(dismissInfoAlert),
+                new DismissalAlertValidator(dismissSuccessAlert),
+                new DismissalAlertValidator(dismissWarnAlert),
+                new DismissalAlertValidator(dismissDanderAlert)
+        );
     }
 }
