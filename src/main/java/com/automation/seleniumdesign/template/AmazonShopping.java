@@ -1,64 +1,45 @@
 package com.automation.seleniumdesign.template;
 
-import com.google.common.util.concurrent.Uninterruptibles;
+import com.automation.seleniumdesign.template.pages.AmazonProductDescPage;
+import com.automation.seleniumdesign.template.pages.AmazonResultsPage;
+import com.automation.seleniumdesign.template.pages.AmazonSearchPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class AmazonShopping extends ShoppingTemplate {
 
     private WebDriver driver;
-    private WebDriverWait wait;
     private String product;
 
-    @FindBy(id = "twotabsearchtextbox")
-    private WebElement searchBox;
-
-    @FindBy(id = "nav-search-submit-button")
-    private WebElement searchBtn;
-
-    @FindBy(css = "span.a-size-medium")
-    private WebElement item;
-
-    @FindBy(xpath = "((//div[@id='corePrice_desktop'])[1]//span)[3]")
-    private WebElement price;
+    private AmazonSearchPage amazonSearchPage;
+    private AmazonResultsPage amazonResultsPage;
+    private AmazonProductDescPage amazonProductDescPage;
 
     public AmazonShopping(final WebDriver driver, final String product) {
         this.driver = driver;
         this.product = product;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        PageFactory.initElements(driver, this);
+        this.amazonSearchPage = PageFactory.initElements(driver, AmazonSearchPage.class);
+        this.amazonResultsPage = new AmazonResultsPage(driver);
+        this.amazonProductDescPage = new AmazonProductDescPage(driver);
     }
 
     @Override
     public void launchSite() {
-        this.driver.get("https://www.amazon.com/");
+        this.amazonSearchPage.launchSite();
     }
 
     @Override
     public void searchForProduct() {
-        this.wait.until(d -> this.searchBox.isDisplayed());
-        this.searchBox.sendKeys(this.product);
-        this.searchBtn.click();
+        this.amazonSearchPage.searchForProduct(this.product);
     }
 
     @Override
     public void selectProduct() {
-        this.wait.until(d -> this.item.isDisplayed());
-        this.item.click();
+        this.amazonResultsPage.selectProduct();
     }
 
     @Override
     public void buy() {
-        this.wait.until(d -> this.price.isDisplayed());
-        //Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
-        //this.wait.until(ExpectedConditions.visibilityOf(this.price));
-        System.out.println("Price: " + this.price.getText());
+        this.amazonProductDescPage.buy();
     }
 }
