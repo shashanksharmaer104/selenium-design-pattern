@@ -1,4 +1,4 @@
-package com.automation.seleniumdesign.strategy;
+package com.automation.seleniumdesign.proxy;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -9,21 +9,21 @@ public class PaymentScreen {
 
     private WebDriver driver;
     private UserInformation userInformation;
-    private Order order;
+    private OrderComponent orderComponent;
     private PaymentOption paymentOption;
 
     public PaymentScreen(final WebDriver driver) {
         this.driver = driver;
         this.userInformation = new UserInformation(driver);
-        this.order = new Order(driver);
+        this.orderComponent = new OrderComponentProxy(driver);
     }
 
     public UserInformation getUserInformation() {
         return userInformation;
     }
 
-    public Order getOrder() {
-        return order;
+    public OrderComponent getOrder() {
+        return orderComponent;
     }
 
     public void setPaymentOption(PaymentOption paymentOption) {

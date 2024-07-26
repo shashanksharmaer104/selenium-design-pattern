@@ -1,4 +1,4 @@
-package com.automation.seleniumdesign.strategy;
+package com.automation.seleniumdesign.proxy;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -1,4 +1,4 @@
-package com.automation.seleniumdesign.strategy;
+package com.automation.seleniumdesign.proxy;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
