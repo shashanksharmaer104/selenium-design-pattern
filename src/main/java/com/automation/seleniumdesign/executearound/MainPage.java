@@ -53,5 +53,4 @@ public class MainPage {
     public void goTo() {
         this.driver.get("https://vins-udemy.s3.amazonaws.com/ds/main.html");
     }
-
 }
