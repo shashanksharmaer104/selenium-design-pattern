@@ -29,6 +29,7 @@ public class DashboardPageTest extends BaseTest {
                 Decorators.guestPage,
                 Decorators.superuserPage,
                 Decorators.adminPage
+                // test comment
         };
     }
 
